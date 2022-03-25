@@ -1,5 +1,5 @@
 import org.json.*;
-import org.json.JSONString;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,8 +15,7 @@ public class Main {
     public static JSONObject EasyBal(String checkbook, double originalBalance) {
         double currentBalance = originalBalance;
         double totalExpense = 0.0;
-        double averageExpense = 0.0;
-        double closingBalance = 0.0;
+        double averageExpense;
         int transactionCounter = 0;
         List<String> transactionString;
         ArrayList<String> transactionsNum = new ArrayList<>();
@@ -25,6 +24,8 @@ public class Main {
 
         JSONObject completedCheckBook = new JSONObject();
         completedCheckBook.put("originalBalance", originalBalance);
+
+//        Disassemble dissassemble = new Disassemble(checkbook);
 
         String[] transactionsArray = checkbook.split("\n");
 
@@ -43,13 +44,16 @@ public class Main {
             double beforeBalance = currentBalance;
             transaction.put("beforeBalance", beforeBalance);
             currentBalance = currentBalance - Double.parseDouble((expenseAmount.get(i)));
+//           math.round for
+            currentBalance = Math.round(currentBalance * 100.00) / 100.00;
             transaction.put("sequenceNumber", Integer.parseInt(transactionsNum.get(i)));
             transaction.put("expense", expenseName.get(i));
             transaction.put("expenseAmount", Double.parseDouble(expenseAmount.get(i)));
             transaction.put("afterBalance", currentBalance);
             transactionArray.put(transaction);
 
-            totalExpense = totalExpense + Double.parseDouble(expenseAmount.get(i));
+            totalExpense = Math.round(totalExpense + Double.parseDouble(expenseAmount.get(i)));
+            totalExpense = Math.round(totalExpense * 100.00) / 100.00;
         }
 
         averageExpense = totalExpense / transactionCounter;
@@ -64,21 +68,12 @@ public class Main {
             file.write(completedCheckBook.toString(4));
             file.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return completedCheckBook;
     }
 }
 
-
-//        {
-////      "sequenceNumber": <int>,
-////      "expense": <text>,
-////      "expenseAmount": <double>,
-////      "balanceAfter": <double>,
-////      "balanceBefore": <double>
-////    },
 
 //let transactions = { sequenceNumber:125, expense: "market", expenseAmount: 125.45}
 // double originalBalance = 1000.00

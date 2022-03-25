@@ -1,43 +1,43 @@
 {
-    "averageExpense": 39.653999999999996,
-    "closingBalance": 801.7299999999998,
-    "totalExpenses": 198.26999999999998,
-    "originalBalance": 1000,
-    "transactions": [
-        {
-            "sequenceNumber": 125,
-            "expenseAmount": 125.45,
-            "beforeBalance": 1000,
-            "expense": "Market",
-            "afterBalance": 874.55
-        },
-        {
-            "sequenceNumber": 126,
-            "expenseAmount": 34.95,
-            "beforeBalance": 874.55,
-            "expense": "Hardware",
-            "afterBalance": 839.5999999999999
-        },
-        {
-            "sequenceNumber": 127,
-            "expenseAmount": 7.45,
-            "beforeBalance": 839.5999999999999,
-            "expense": "Video",
-            "afterBalance": 832.1499999999999
-        },
-        {
-            "sequenceNumber": 128,
-            "expenseAmount": 14.32,
-            "beforeBalance": 832.1499999999999,
-            "expense": "Book",
-            "afterBalance": 817.8299999999998
-        },
-        {
-            "sequenceNumber": 129,
-            "expenseAmount": 16.1,
-            "beforeBalance": 817.8299999999998,
-            "expense": "Gasoline",
-            "afterBalance": 801.7299999999998
-        }
-    ]
+  "averageExpense": 39.4,
+  "closingBalance": 801.73,
+  "totalExpenses": 197,
+  "originalBalance": 1000,
+  "transactions": [
+    {
+      "sequenceNumber": 125,
+      "expenseAmount": 125.45,
+      "beforeBalance": 1000,
+      "expense": "Market",
+      "afterBalance": 874.55
+    },
+    {
+      "sequenceNumber": 126,
+      "expenseAmount": 34.95,
+      "beforeBalance": 874.55,
+      "expense": "Hardware",
+      "afterBalance": 839.6
+    },
+    {
+      "sequenceNumber": 127,
+      "expenseAmount": 7.45,
+      "beforeBalance": 839.6,
+      "expense": "Video",
+      "afterBalance": 832.15
+    },
+    {
+      "sequenceNumber": 128,
+      "expenseAmount": 14.32,
+      "beforeBalance": 832.15,
+      "expense": "Book",
+      "afterBalance": 817.83
+    },
+    {
+      "sequenceNumber": 129,
+      "expenseAmount": 16.1,
+      "beforeBalance": 817.83,
+      "expense": "Gasoline",
+      "afterBalance": 801.73
+    }
+  ]
 }
