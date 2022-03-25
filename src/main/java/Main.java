@@ -1,5 +1,4 @@
 import org.json.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,44 +6,68 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        String output = "125 Market 125.45\n126 Hardware 34.95\n127 Video 7.45\n128 Book 14.32\n129 Gasoline 16.10";
-        System.out.println(EasyBal(output, 1000.00));
+    public final static String SEQUENCE_NUMBER = "sequenceNumber";
+    public final static String EXPENSE_NAME = "expense";
+    public final static String EXPENSE_AMOUNT = "expenseAmount";
+    String checkbook = "125 Market 125.45\n126 Hardware 34.95\n127 Video 7.45\n128 Book 14.32\n129 Gasoline 16.10"; // Original checkbook string
+    double currentBalance = 1000.00; // Holds current balance
+    double totalExpense = 0.0; // Holds total expenses
+    final ArrayList<String> transactionsNum = new ArrayList<>(); // ArrayList to hold transaction #
+    final ArrayList<String> expenseName = new ArrayList<>(); // ArrayList to hold transaction name
+    final ArrayList<String> expenseAmount = new ArrayList<>(); // ArrayList to hold transaction cost
+    int transactionCounter = 0; // Counter for # of transactions
+    JSONObject completedCheckBook; //JSONObject to hold entire solution
+
+    // Constructor
+    public Main() {
+        Setup(checkbook, currentBalance); // Call Setup() method
+        Disassemble(); // Call Disassemble method
+        Packer(); // Call Packer method
+        SendToJSONFile(); // Call SendToJSONFile() method
     }
 
-    public static JSONObject EasyBal(String checkbook, double originalBalance) {
-        double currentBalance = originalBalance;
-        double totalExpense = 0.0;
-        double averageExpense;
-        int transactionCounter = 0;
-        List<String> transactionString;
-        ArrayList<String> transactionsNum = new ArrayList<>();
-        ArrayList<String> expenseName = new ArrayList<>();
-        ArrayList<String> expenseAmount = new ArrayList<>();
+    // Main method to call the constructor
+    public static void main(String[] args) {
+        Main main = new Main();
+        Packer packer = new Packer();
+        Disassembler disassembler = new Disassembler();
+        JSONArray transactions = disassembler.Disassemble(main.checkbook);
+        JSONObject completedCheckBook = packer.Pack(transactions);
+    }
 
-        JSONObject completedCheckBook = new JSONObject();
-        completedCheckBook.put("originalBalance", originalBalance);
+    // Setup method
+    public void Setup(String checkbook, double currentBalance) {
+        this.checkbook = checkbook;
+        this.currentBalance = currentBalance;
 
-//        Disassemble dissassemble = new Disassemble(checkbook);
+        completedCheckBook = new JSONObject();
+        completedCheckBook.put("originalBalance", currentBalance);
+    }
 
+    // Disassemble method to sort and store items
+    public void Disassemble() {
         String[] transactionsArray = checkbook.split("\n");
 
         for (String ele : transactionsArray) {
-            transactionString = Arrays.asList(ele.split((" ")));
-            transactionsNum.add(transactionString.get(0));
-            expenseName.add(transactionString.get(1));
-            expenseAmount.add(transactionString.get(2));
-            transactionCounter += 1;
+            List<String> transactionString = Arrays.asList(ele.split((" ")));
+            this.transactionsNum.add(transactionString.get(0));
+            this.expenseName.add(transactionString.get(1));
+            this.expenseAmount.add(transactionString.get(2));
+            this.transactionCounter += 1;
         }
+    }
 
+    // Packer method for JSON objects/arrays + perform calculations
+    public JSONObject Packer() {
+        double averageExpense = 0.0;
+        double beforeBalance = 0.0;
         JSONArray transactionArray = new JSONArray();
 
         for (int i = 0; i < transactionCounter; i++) {
             JSONObject transaction = new JSONObject();
-            double beforeBalance = currentBalance;
+            beforeBalance = currentBalance;
             transaction.put("beforeBalance", beforeBalance);
             currentBalance = currentBalance - Double.parseDouble((expenseAmount.get(i)));
-//           math.round for
             currentBalance = Math.round(currentBalance * 100.00) / 100.00;
             transaction.put("sequenceNumber", Integer.parseInt(transactionsNum.get(i)));
             transaction.put("expense", expenseName.get(i));
@@ -52,7 +75,7 @@ public class Main {
             transaction.put("afterBalance", currentBalance);
             transactionArray.put(transaction);
 
-            totalExpense = Math.round(totalExpense + Double.parseDouble(expenseAmount.get(i)));
+            totalExpense = totalExpense + Double.parseDouble(expenseAmount.get(i));
             totalExpense = Math.round(totalExpense * 100.00) / 100.00;
         }
 
@@ -63,48 +86,20 @@ public class Main {
         completedCheckBook.put("totalExpenses", totalExpense);
         completedCheckBook.put("averageExpense", averageExpense);
 
+        System.out.println(completedCheckBook);
+        return completedCheckBook;
+    }
+
+    // SendToJSONFile to send solution to seperate file in JSON
+    public void SendToJSONFile() {
         try {
             FileWriter file = new FileWriter("C:\\Users\\JesseEledath\\IdeaProjects\\CodingProblems\\src\\main\\book.json");
             file.write(completedCheckBook.toString(4));
             file.close();
+            System.out.println("Sent to JSON file.");
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Could not send to JSON file.");
         }
-        return completedCheckBook;
     }
 }
-
-
-//let transactions = { sequenceNumber:125, expense: "market", expenseAmount: 125.45}
-// double originalBalance = 1000.00
-// put checkbook into a string (without starting balance)
-// split the checkbook [sequenceNumber: 125; expense: "Market"; expenseAmount: 125.45;]
-// do math to calculate the balance before (double balance = originalBalance) and balance after (balance - expenseAmount)
-// counter to track number of transactions
-// double averageExpense = totalExpenses / counter; do calc at the end to divide averageExpense by # of transactions.
-// double totalExpenses =+ expense
-// double closingBalance = originalBalance; closingBalance =- expense;
-
-//end goal v
-//{
-//  "originalBalance": <original balance as a double>,
-//  "transactions":[
-//    {
-////      "sequenceNumber": <int>,
-////      "expense": <text>,
-////      "expenseAmount": <double>,
-////      "balanceAfter": <double>,
-////      "balanceBefore": <double>
-////    },
-//    {
-//      "sequenceNumber": <int>,
-//      "expense": <text>,
-//      "expenseAmount": <double>,
-//      "balanceAfter": <double>,
-//      "balanceBefore": <double>
-//    }
-//  ],
-//  "closingBalance": <double>,
-//  "totalExpenses": <double>,
-//  "averageExpense": <double>
-//}

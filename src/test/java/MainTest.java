@@ -3,25 +3,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
+    Main main = new Main();
 
-//    public class main {
-//
-//        @Test
-//        public void testValidWords() {
-//            assertTrue(CharacterCounter.validateWord("?!?!?!"));
-//            assertTrue(CharacterCounter.validateWord("abcabc"));
-//            assertTrue(CharacterCounter.validateWord("AbcaBc"));
-//            assertTrue(CharacterCounter.validateWord("AbcCBa"));
-//            assertTrue(CharacterCounter.validateWord("abc123"));
-//            assertTrue(CharacterCounter.validateWord("abc!abc!"));
-//        }
-//
-//        @Test
-//        public void testInvalidWords() {
-//            assertFalse(CharacterCounter.validateWord("AbcabcC"));
-//            assertFalse(CharacterCounter.validateWord("piappi"));
-//            assertFalse(CharacterCounter.validateWord("abcabcd"));
-//            assertFalse(CharacterCounter.validateWord("?abc:abc"));
-//        }
-//    }
+    @Test
+    public void SetupTest() {
+        main.checkbook = "Some value";
+        main.currentBalance = 5;
+
+        assertEquals(main.checkbook, "Some value"); // Test checkbook
+        assertEquals(main.currentBalance, 5); // Test currentBalance
+
+        main.Setup("1233.00\n125 Boat;! 24.80?\n123 Flowers 93.50;\n127 Meat 120.90\n120 Picture 34.00\n124 Gasoline 11.00\n", 9000); // Call method
+
+        assertNotEquals(main.checkbook, "125 Market 125.45\n126 Hardware 34.95\n127 Video 7.45\n128 Book 14.32\n129 Gasoline 16.10"); // Test checkbook
+        assertNotEquals(main.currentBalance, 1000); // Test current balance
+    }
 }
