@@ -32,7 +32,7 @@ public class Main {
         Packer packer = new Packer();
         Disassembler disassembler = new Disassembler();
         JSONArray transactions = disassembler.Disassemble(main.checkbook);
-        JSONObject completedCheckBook = packer.Pack(transactions);
+        //JSONObject completedCheckBook = packer.Pack(transactions);
     }
 
     // Setup method

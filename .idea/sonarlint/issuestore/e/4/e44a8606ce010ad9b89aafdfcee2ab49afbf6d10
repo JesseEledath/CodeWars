@@ -1,0 +1,33 @@
+
+[
+java:S1124	"EReorder the modifiers to comply with the Java Language Specification.(Áô±Ô
+[
+java:S1124
+"EReorder the modifiers to comply with the Java Language Specification.(Ì¢©®
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ü½ôû
+a
+java:S1854#"FRemove this useless assignment to local variable "completedCheckBook".(ÆÑì—úÿÿÿÿ
+R
+java:S1481#"7Remove this unused "completedCheckBook" local variable.(ÆÑì—úÿÿÿÿ
+h	java:S100'"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğãêöùÿÿÿÿ
+c	java:S1000"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†íØÑ
+c	java:S100="NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñ•Ñ
+W
+java:S1854?"ARemove this useless assignment to local variable "beforeBalance".(×™¹Š
+]
+java:S1854>"BRemove this useless assignment to local variable "averageExpense".(±ßöÜÿÿÿÿÿ
+N	java:S106Y"9Replace this use of System.out or System.err by a logger.(ëëàû
+h	java:S100^"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šÀüœùÿÿÿÿ
+S	java:S106c"9Replace this use of System.out or System.err by a logger.(¹Ùç‚şÿÿÿÿ
+N	java:S106f"9Replace this use of System.out or System.err by a logger.(ÆŞ©ğ
+p
+java:S1192H"UUse already-defined constant 'SEQUENCE_NUMBER' instead of duplicating its value here.(–æçøÿÿÿÿ
+m
+java:S1192I"RUse already-defined constant 'EXPENSE_NAME' instead of duplicating its value here.(Ç¸èåüÿÿÿÿ
+o
+java:S1192J"TUse already-defined constant 'EXPENSE_AMOUNT' instead of duplicating its value here.(–šˆıÿÿÿÿ
+0
+java:S1220""Move this file to a named package.
+c
+java:S2095`"HUse try-with-resources or close this "FileWriter" in a "finally" clause.(Ê¿åÓùÿÿÿÿ
